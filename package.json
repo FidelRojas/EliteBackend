@@ -1,0 +1,58 @@
+{
+  "name": "elite-backend",
+  "version": "1.0.6",
+  "description": "",
+  "main": "index.js",
+  "jest": {
+    "testPathIgnorePatterns": [
+      "src/database/models/test.js"
+    ]
+  },
+  "scripts": {
+    "dev": "nodemon src/index.js --exec node_modules/.bin/babel-node",
+    "build": "babel src --out-dir dist",
+    "start": "node dist/index.js",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "test": "cross-env NODE_ENV=test jest --coverage --detectOpenHandles --testTimeout=10000",
+    "pretest": "cross-env NODE_ENV=test npm run db:reset",
+    "db:create:test": "cross-env NODE_ENV=test npx sequelize-cli db:create",
+    "jest": {
+      "testEnvironment": "node",
+      "coveragePathIgnorePatterns": [
+        "/node_modules/"
+      ]
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "@babel/runtime": "^7.16.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "morgan": "^1.10.0",
+    "node-cache": "^5.1.2",
+    "pg": "^8.6.0",
+    "pg-hstore": "^2.3.3",
+    "prettier": "^2.3.0",
+    "sequelize": "^6.6.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.3",
+    "@babel/core": "^7.14.3",
+    "@babel/node": "^7.14.2",
+    "@babel/plugin-transform-runtime": "^7.16.0",
+    "@babel/preset-env": "^7.14.2",
+    "@babel/preset-react": "^7.18.6",
+    "cross-env": "^7.0.3",
+    "jest": "^27.3.1",
+    "nodemon": "^2.0.7",
+    "supertest": "^6.1.6"
+  }
+}
