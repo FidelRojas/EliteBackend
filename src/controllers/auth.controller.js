@@ -1,7 +1,7 @@
 const models = require('../database/models/index')
 import { getUserToken } from '../services/token.service'
 
-export async function login(req, res) {
+export async function login(req, res, next) {
   const { userName, password } = req.body
   try {
     const userFound = await models.User.findOne({
@@ -22,13 +22,8 @@ export async function login(req, res) {
 
     res.json({ token })
   } catch (error) {
-    catchError(error, res)
+    next(error)
   }
-}
-function catchError(error, res) {
-  res.status(500).json({
-    message: 'Algo no salio bien'
-  })
 }
 
 function loginFailed(res) {

@@ -14,7 +14,9 @@ module.exports = {
           lastName: 'Rojas',
           identityCard: '7919108',
           phone: '72202143',
-          roleId: 1
+          roleId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
       ],
       {}

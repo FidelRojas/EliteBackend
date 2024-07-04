@@ -7,7 +7,9 @@ module.exports = {
       [
         {
           name: 'admin',
-          label: "Administrador"
+          label: "Administrador",
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
       ],
       {}
