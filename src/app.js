@@ -2,6 +2,7 @@ import express, { json } from 'express'
 import morgan from 'morgan'
 import authRoutes from './routes/auth.routes'
 import userRoutes from './routes/user.routes'
+import truckRoutes from './routes/truck.routes'
 
 import {
   errorLogger,
@@ -23,6 +24,7 @@ app.use(cors)
 //routes
 app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)
+app.use('/api/truck', truckRoutes)
 
 //middleware errors
 app.use(errorLogger)
