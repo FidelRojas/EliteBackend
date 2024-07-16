@@ -3,6 +3,7 @@ import morgan from 'morgan'
 import authRoutes from './routes/auth.routes'
 import userRoutes from './routes/user.routes'
 import truckRoutes from './routes/truck.routes'
+import cityRoutes from './routes/city.routes'
 
 import {
   errorLogger,
@@ -24,7 +25,8 @@ app.use(cors)
 //routes
 app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)
-app.use('/api/truck', truckRoutes)
+app.use('/api/trucks', truckRoutes)
+app.use('/api/cities', cityRoutes)
 
 //middleware errors
 app.use(errorLogger)
