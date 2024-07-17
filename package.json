@@ -8,6 +8,9 @@
       "src/database/models/test.js"
     ]
   },
+  "engines": {
+    "node": "21.4.0"
+  },
   "scripts": {
     "dev": "nodemon src/index.js --exec node_modules/.bin/babel-node",
     "build": "babel src --out-dir dist",
@@ -50,6 +53,7 @@
     "@babel/plugin-transform-runtime": "^7.16.0",
     "@babel/preset-env": "^7.14.2",
     "@babel/preset-react": "^7.18.6",
+    "@flydotio/dockerfile": "^0.5.8",
     "cross-env": "^7.0.3",
     "jest": "^27.3.1",
     "nodemon": "^2.0.7",

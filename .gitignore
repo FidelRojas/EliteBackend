@@ -114,9 +114,6 @@ dist
 # All vscode extensions file
 .vscode
 
-# Package lock.json file
-package-lock.json
-
 # Config db
 src/database/config/config.js
 
