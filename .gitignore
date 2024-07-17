@@ -114,7 +114,4 @@ dist
 # All vscode extensions file
 .vscode
 
-# Config db
-src/database/config/config.js
-
 # End of https://www.toptal.com/developers/gitignore/api/node
