@@ -4,6 +4,7 @@ import authRoutes from './routes/auth.routes'
 import userRoutes from './routes/user.routes'
 import truckRoutes from './routes/truck.routes'
 import cityRoutes from './routes/city.routes'
+import travelRoutes from './routes/travel.routes'
 
 import {
   errorLogger,
@@ -27,6 +28,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/trucks', truckRoutes)
 app.use('/api/cities', cityRoutes)
+app.use('/api/travel', travelRoutes)
 
 //middleware errors
 app.use(errorLogger)

@@ -117,6 +117,21 @@ export async function updateTruck(truckId, truck) {
   return truckResponse
 }
 
+export const findTruck = async (truckId) => {
+  const truck = await models.Truck.findOne({
+    where: {
+      id: truckId,
+      status: { [Op.ne]: 0 }
+    }
+  })
+
+  if (!truck) {
+    truckNotExist(truckId)
+  }
+
+  return truck
+}
+
 function truckNotExist(truckId) {
   throw new Error(`El camión con id: ${truckId} no existe`)
 }

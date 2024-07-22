@@ -92,6 +92,23 @@ export async function updateCity(cityId, city) {
     return cityResponse
 }
 
+
+export const findCity = async (cityId) => {
+    const city = await models.City.findOne({
+      where: {
+        id: cityId,
+        status: { [Op.ne]: 0 }
+      }
+    })
+  
+    if (!city) {
+      cityNotExist(cityId)
+    }
+  
+    return city
+  }
+  
+
 function cityNotExist(cityId) {
     throw new Error(`La ciudad con id: ${cityId} no existe`)
 }
