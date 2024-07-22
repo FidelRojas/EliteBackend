@@ -22,7 +22,7 @@ module.exports = {
         references: {
           model: 'Cities',
           key: 'id',
-          as: 'from'
+          as: 'cityFrom'
         }
       },
       to: {
@@ -30,7 +30,7 @@ module.exports = {
         references: {
           model: 'Cities',
           key: 'id',
-          as: 'to'
+          as: 'cityTo'
         }
       },
       notes: {

@@ -28,7 +28,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/trucks', truckRoutes)
 app.use('/api/cities', cityRoutes)
-app.use('/api/travel', travelRoutes)
+app.use('/api/travels', travelRoutes)
 
 //middleware errors
 app.use(errorLogger)

@@ -9,9 +9,15 @@ module.exports = (sequelize, DataTypes) => {
       })
       Travel.belongsTo(models.City, {
         foreignKey: 'from',
+        targetKey: 'id',
+        as: 'fromCity'
+
+
       })
       Travel.belongsTo(models.City, {
         foreignKey: 'to',
+        targetKey: 'id',
+        as: 'toCity'
       })
     }
   }

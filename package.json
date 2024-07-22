@@ -9,7 +9,7 @@
     ]
   },
   "engines": {
-    "node": "21.4.0"
+    "node": "v20.15.1"
   },
   "scripts": {
     "dev": "nodemon src/index.js --exec node_modules/.bin/babel-node",

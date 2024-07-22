@@ -12,7 +12,24 @@ export async function getTravels(query) {
     },
     order: orderBy ? [[orderBy, order.toUpperCase()]] : [['id', 'ASC']],
     limit: parseInt(rowsPerPage, 10),
-    offset: parseInt(page, 10) * parseInt(rowsPerPage, 10)
+    offset: parseInt(page, 10) * parseInt(rowsPerPage, 10),
+    include: [
+      {
+        model: models.Truck,
+        as: 'truck',
+        attributes: ['id', 'plate']
+      },
+      {
+        model: models.City,
+        as: 'toCity',
+
+        attributes: ['id', 'name']
+      }, {
+        model: models.City,
+        as: 'fromCity',
+
+        attributes: ['id', 'name']
+      }]
   }
   if (searchBy) {
 
@@ -21,13 +38,15 @@ export async function getTravels(query) {
         [Op.iLike]: `%${search}%`
       }
     }
-    const travels = await models.Travel.findAndCountAll(options)
-    return {
-      data: travels.rows,
-      total: travels.count,
-    }
+  }
+
+  const travels = await models.Travel.findAndCountAll(options)
+  return {
+    data: travels.rows,
+    total: travels.count,
   }
 }
+
 
 export async function getTravel(travelId) {
   const travel = await models.Travel.findOne({
@@ -59,7 +78,30 @@ export async function createTravel({
   })
 
   if (!newTravel) throw new Error('Error al crear el viaje')
-  return newTravel
+
+  const travel = await models.Travel.findByPk(
+    newTravel.id,
+    {
+      include: [
+        {
+          model: models.Truck,
+          as: 'truck',
+          attributes: ['id', 'plate']
+        },
+        {
+          model: models.City,
+          as: 'toCity',
+
+          attributes: ['id', 'name']
+        }, {
+          model: models.City,
+          as: 'fromCity',
+
+          attributes: ['id', 'name']
+        }],
+    }
+  )
+  return travel
 }
 
 export async function deleteTravel(travelId) {
@@ -112,7 +154,24 @@ export async function updateTravel(travelId, travel) {
     where: {
       id: travelId,
       status: { [Op.ne]: 0 }
-    }
+    },
+    include: [
+      {
+        model: models.Truck,
+        as: 'truck',
+        attributes: ['id', 'plate']
+      },
+      {
+        model: models.City,
+        as: 'toCity',
+
+        attributes: ['id', 'name']
+      }, {
+        model: models.City,
+        as: 'fromCity',
+
+        attributes: ['id', 'name']
+      }],
   })
 
   return travelResponse
