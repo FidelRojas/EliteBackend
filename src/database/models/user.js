@@ -32,6 +32,9 @@ module.exports = (sequelize, DataTypes) => {
       lastName: {
         type: DataTypes.STRING
       },
+      updatedBy: {
+        type: DataTypes.STRING
+      },
       roleId: DataTypes.INTEGER,
     },
     {

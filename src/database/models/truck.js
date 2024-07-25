@@ -26,6 +26,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING
       },
       notes: {
+        type: DataTypes.TEXT
+      },
+      updatedBy: {
         type: DataTypes.STRING
       },
       status: {

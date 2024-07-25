@@ -49,22 +49,23 @@ export async function createTruck({
   brand,
   year,
   type,
-  notes,
-
-}) {
+  notes
+},
+  updatedBy) {
   const newTruck = await models.Truck.create({
     plate,
     brand,
     year,
     type,
     notes,
+    updatedBy
   })
 
   if (!newTruck) throw new Error('Error al crear el camión')
   return newTruck
 }
 
-export async function deleteTruck(truckId) {
+export async function deleteTruck(truckId, updatedBy) {
   const truck = await models.Truck.findOne({
     where: {
       id: truckId,
@@ -74,13 +75,14 @@ export async function deleteTruck(truckId) {
   if (!truck) truckNotExist(truckId)
 
   await truck.update({
-    status: 0
+    status: 0,
+    updatedBy
   })
 
   return 'Camión eliminado con éxito'
 }
 
-export async function updateTruck(truckId, truck) {
+export async function updateTruck(truckId, truck, updatedBy) {
   let truckResponse
   const {
     plate,
@@ -105,6 +107,8 @@ export async function updateTruck(truckId, truck) {
     year,
     type,
     notes,
+    updatedBy
+
   })
 
   truckResponse = await models.Truck.findOne({

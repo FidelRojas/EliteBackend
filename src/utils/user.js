@@ -1,0 +1,1 @@
+export const getUpdatedByFromReq = (req) => `${req.userId}|${req.userName}|${req.userRole}` 

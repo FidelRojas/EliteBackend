@@ -63,8 +63,9 @@ export async function createTravel({
   truckId,
   from,
   to,
-  notes,
-}) {
+  notes },
+  updatedBy
+) {
 
   if (truckId) findTruck(truckId)
   if (from) findCity(from)
@@ -75,6 +76,7 @@ export async function createTravel({
     from,
     to,
     notes,
+    updatedBy
   })
 
   if (!newTravel) throw new Error('Error al crear el viaje')
@@ -104,7 +106,7 @@ export async function createTravel({
   return travel
 }
 
-export async function deleteTravel(travelId) {
+export async function deleteTravel(travelId, updatedBy) {
   const travel = await models.Travel.findOne({
     where: {
       id: travelId,
@@ -114,13 +116,14 @@ export async function deleteTravel(travelId) {
   if (!travel) travelNotExist(travelId)
 
   await travel.update({
-    status: 0
+    status: 0,
+    updatedBy
   })
 
   return 'Viaje eliminado con éxito'
 }
 
-export async function updateTravel(travelId, travel) {
+export async function updateTravel(travelId, travel, updatedBy) {
   let travelResponse
   const {
     truckId,
@@ -148,6 +151,8 @@ export async function updateTravel(travelId, travel) {
     from,
     to,
     notes,
+    updatedBy
+
   })
 
   travelResponse = await models.Travel.findOne({
