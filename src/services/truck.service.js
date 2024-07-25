@@ -2,14 +2,18 @@ const models = require('../database/models/index')
 const { Op } = require('sequelize')
 
 export async function getTrucks(query) {
-  const { order = 'ASC', orderBy = 'id', page = 0, rowsPerPage = 10, search = '', searchBy = '' } = query;
+  const { order = 'ASC', orderBy = 'id', page, rowsPerPage, search = '', searchBy = '' } = query;
   const options = {
     where: {
       status: { [Op.ne]: 0 },
     },
     order: orderBy ? [[orderBy, order.toUpperCase()]] : [['id', 'ASC']],
-    limit: parseInt(rowsPerPage, 10),
-    offset: parseInt(page, 10) * parseInt(rowsPerPage, 10)
+  }
+  if (rowsPerPage) {
+    options.limit = parseInt(rowsPerPage, 10)
+  }
+  if (rowsPerPage) {
+    options.offset = parseInt(page, 10) * parseInt(rowsPerPage, 10)
   }
   if (searchBy) {
     if (searchBy === 'year') {
