@@ -66,7 +66,10 @@ export async function createTravel({
   truckId,
   from,
   to,
-  notes },
+  notes,
+  departureDate,
+  arrivalDate
+},
   updatedBy
 ) {
 
@@ -79,6 +82,8 @@ export async function createTravel({
     from,
     to,
     notes,
+    departureDate,
+    arrivalDate,
     updatedBy
   })
 
@@ -126,12 +131,14 @@ export async function deleteTravel(travelId, updatedBy) {
   return 'Viaje eliminado con éxito'
 }
 
-export async function updateTravel(travelId, travel, updatedBy) {
+export async function updateTravel(travelId, travel, updatedBy,) {
   let travelResponse
   const {
     truckId,
     from,
     to,
+    departureDate,
+    arrivalDate,
     notes,
   } = travel
   const travelDB = await models.Travel.findOne({
@@ -153,6 +160,8 @@ export async function updateTravel(travelId, travel, updatedBy) {
     truckId,
     from,
     to,
+    departureDate,
+    arrivalDate,
     notes,
     updatedBy
 

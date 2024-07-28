@@ -35,6 +35,12 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false
       },
+      departureDate: {
+        type: DataTypes.DATE,
+      },
+      arrivalDate: {
+        type: DataTypes.DATE,
+      },
       notes: {
         type: DataTypes.TEXT
       },
