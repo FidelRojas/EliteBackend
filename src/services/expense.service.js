@@ -148,8 +148,7 @@ export async function updateExpense(expenseId, expense, updatedBy) {
   })
 
   if (truckId) findTruck(truckId)
-  if (categoryId) findCategory(categoryIdfrom)
-
+  if (categoryId) findCategory(categoryId)
   if (!expenseDB) return expenseNotExist(expenseId)
 
   await expenseDB.update({
