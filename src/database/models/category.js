@@ -1,19 +1,17 @@
 'use strict'
 const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
-  class City extends Model {
+  class Category extends Model {
     static associate(models) {
-      City.hasMany(models.Travel, {
-        foreignKey: 'from'
-      })
-      City.hasMany(models.Travel, {
-        foreignKey: 'to'
-      })
     }
   }
-  City.init(
+  Category.init(
     {
       name: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      updatedBy: {
         type: DataTypes.STRING,
         allowNull: false
       },
@@ -27,8 +25,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'City'
+      modelName: 'Category'
     }
   )
-  return City
+  return Category
 }

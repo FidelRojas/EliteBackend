@@ -36,7 +36,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       },
       notes: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT
+      },
+      updatedBy: {
+        type: DataTypes.STRING
       },
       status: {
         type: DataTypes.INTEGER,

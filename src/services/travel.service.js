@@ -5,14 +5,12 @@ const models = require('../database/models/index')
 const { Op } = require('sequelize')
 
 export async function getTravels(query) {
-  const { order = 'ASC', orderBy = 'id', page = 0, rowsPerPage = 10, search = '', searchBy = '' } = query;
+  const { order = 'ASC', orderBy = 'id', page, rowsPerPage, search = '', searchBy = '' } = query;
   const options = {
     where: {
       status: { [Op.ne]: 0 },
     },
     order: orderBy ? [[orderBy, order.toUpperCase()]] : [['id', 'ASC']],
-    limit: parseInt(rowsPerPage, 10),
-    offset: parseInt(page, 10) * parseInt(rowsPerPage, 10),
     include: [
       {
         model: models.Truck,
@@ -31,8 +29,13 @@ export async function getTravels(query) {
         attributes: ['id', 'name']
       }]
   }
+  if (rowsPerPage) {
+    options.limit = parseInt(rowsPerPage, 10)
+  }
+  if (rowsPerPage) {
+    options.offset = parseInt(page, 10) * parseInt(rowsPerPage, 10)
+  }
   if (searchBy) {
-
     options.where = {
       ...options.where, [searchBy]: {
         [Op.iLike]: `%${search}%`
@@ -63,8 +66,9 @@ export async function createTravel({
   truckId,
   from,
   to,
-  notes,
-}) {
+  notes },
+  updatedBy
+) {
 
   if (truckId) findTruck(truckId)
   if (from) findCity(from)
@@ -75,6 +79,7 @@ export async function createTravel({
     from,
     to,
     notes,
+    updatedBy
   })
 
   if (!newTravel) throw new Error('Error al crear el viaje')
@@ -104,7 +109,7 @@ export async function createTravel({
   return travel
 }
 
-export async function deleteTravel(travelId) {
+export async function deleteTravel(travelId, updatedBy) {
   const travel = await models.Travel.findOne({
     where: {
       id: travelId,
@@ -114,13 +119,14 @@ export async function deleteTravel(travelId) {
   if (!travel) travelNotExist(travelId)
 
   await travel.update({
-    status: 0
+    status: 0,
+    updatedBy
   })
 
   return 'Viaje eliminado con éxito'
 }
 
-export async function updateTravel(travelId, travel) {
+export async function updateTravel(travelId, travel, updatedBy) {
   let travelResponse
   const {
     truckId,
@@ -148,6 +154,8 @@ export async function updateTravel(travelId, travel) {
     from,
     to,
     notes,
+    updatedBy
+
   })
 
   travelResponse = await models.Travel.findOne({
