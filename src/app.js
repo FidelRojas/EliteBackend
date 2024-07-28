@@ -5,6 +5,8 @@ import userRoutes from './routes/user.routes'
 import truckRoutes from './routes/truck.routes'
 import cityRoutes from './routes/city.routes'
 import travelRoutes from './routes/travel.routes'
+import categoriesRoutes from './routes/category.routes'
+import expensesRoutes from './routes/expense.routes'
 
 import {
   errorLogger,
@@ -29,6 +31,8 @@ app.use('/api/users', userRoutes)
 app.use('/api/trucks', truckRoutes)
 app.use('/api/cities', cityRoutes)
 app.use('/api/travels', travelRoutes)
+app.use('/api/categories', categoriesRoutes)
+app.use('/api/expenses', expensesRoutes)
 
 //middleware errors
 app.use(errorLogger)
